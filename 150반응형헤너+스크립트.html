@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반응형헤더+스크립트</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
+    <link href="css/150.css" rel="stylesheet"/>
+
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1>
+                <a href="#">LOGO</a>
+            </h1>
+                <nav class="pc">
+                    <ul>
+                        <li class="depth01">
+                            <a href="#">menu01</a>
+                            <ul class="depth02">
+                                <li><a href="#">menu01-01</a></li>
+                                <li><a href="#">menu01-02</a></li>
+                                <li><a href="#">menu01-03</a></li>
+                                <li><a href="#">menu01-04</a></li>
+                            </ul>
+                        </li><!-- .depth01 end -->
+
+                        <li class="depth01">
+                            <a href="#">menu02</a>
+                            <ul class="depth02">
+                                <li><a href="#">menu02-01</a></li>
+                                <li><a href="#">menu02-02</a></li>
+                                <li><a href="#">menu02-03</a></li>
+                                <li><a href="#">menu02-04</a></li>
+                            </ul>
+                        </li><!-- .depth01 end -->
+                        <li class="depth01">
+                            <a href="#">menu03</a>
+                            <ul class="depth02">
+                                <li><a href="#">menu03-01</a></li>
+                                <li><a href="#">menu03-02</a></li>
+                                <li><a href="#">menu03-03</a></li>
+                                <li><a href="#">menu03-04</a></li>
+                            </ul>
+                        </li><!-- .depth01 end -->
+                    </ul>
+                </nav><!-- .pc end -->
+
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-window-close"></i>
+                <nav class="mobile">
+                    <ul>
+                        <li class="depth01">
+                            <a href="#">menu01</a>
+                            <ul class="depth02">
+                                <li><a href="#">menu01-01</a></li>
+                                <li><a href="#">menu01-02</a></li>
+                                <li><a href="#">menu01-03</a></li>
+                                <li><a href="#">menu01-04</a></li>
+                            </ul>
+                        </li><!-- .depth01 end -->
+                        <li class="depth01">
+                            <a href="#">menu02</a>
+                            <ul class="depth02">
+                                <li><a href="#">menu02-01</a></li>
+                                <li><a href="#">menu02-02</a></li>
+                                <li><a href="#">menu02-03</a></li>
+                                <li><a href="#">menu02-04</a></li>
+                            </ul>
+                        </li><!-- .depth01 end -->
+                        <li class="depth01">
+                            <a href="#">menu03</a>
+                            <ul class="depth02">
+                                <li><a href="#">menu03-01</a></li>
+                                <li><a href="#">menu03-02</a></li>
+                                <li><a href="#">menu03-03</a></li>
+                                <li><a href="#">menu03-04</a></li>
+                            </ul>
+                        </li><!-- .depth01 end -->
+                    </ul>
+                </nav><!-- .mobile end -->
+            
+        </div><!-- .header end -->
+        <div class="menu_bg">
+
+        </div>
+    </header>
+    <div class="main_visual">
+        <dl>
+            <dt>반응형메뉴 스크립트</dt>
+            <dd>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut officiis quibusdam</dd>
+        </dl>
+    </div><!-- .main_visual end -->
+    <script src="lib/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            // 풀드롭 다운
+            // 1차메뉴에 마우스올렸을때- 2차메뉴 슬라이드 다운
+            // 1차메뉴에 마우스 벗어났을때 - 2차메뉴 슬라이드 업
+
+            $('.pc > ul > li, .menu_bg').mouseover(function(){
+                $('.pc .depth02, .menu_bg').stop().slideDown();
+            });
+            $('.pc > ul > li , .menu_bg').mouseout(function(){
+                $('.pc .depth02, .menu_bg').stop().slideUp();
+            });
+            // 햅버거 아이콘 클릭시 .mobile이 좌측에서 우측으로
+            $('.fa-bars').click(function(){
+                $('.mobile').css({'left':'0'});
+                $('.fa-bars').hide();
+                $('.fa-window-close').show();
+            });
+            // 햄버거 아이콘 숨김 hide()
+                // 닫기 아이콘 보임 show()
+            $('.fa-window-close').click(function(){
+                $('.mobile').css({'left':'-100%'});
+            });
+
+            // 아코디언 메뉴 작성
+            // 1차메뉴를 클릭했을때 이벤트 발생
+            // 클릭한 요소의 뒤에있는 형제 요소가 display none일때
+            // 모든 2차 메뉴가 슬라이드업()
+            // 클릭한 요소의 뒤에있는형제요소가 슬라이드 다운()
+            $('.mobile .depth01 > a').click(function(){
+                if($(this).next().css('display') == 'none'){
+                    $('.mobile .depth02').stop().slideUp();
+                    $(this).next().stop().slideDown();
+                    $('.mobile .depth01 > a').removeClass('on');
+                    $(this).addClass('on');
+                }
+                else{
+                     $(this).next().stop().slideUp();
+                     $(this).removeClass('on');
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
